@@ -8,7 +8,7 @@ ${checkout_txt}    Checkout: Complete
 
 *** Test Cases ***
 Basket delete
-   [Documentation]    delete all the items and check they were deleted
+   [Documentation]    Delete all items in basket and check they were deleted
    GoTo    https://www.saucedemo.com/
    Get users credentials
    Log into    ${STANDARD_USER_LOGIN}    ${PASSWORD}
@@ -16,11 +16,12 @@ Basket delete
    Price sorting control
    Add items to basket    3
    Open basket
+   Price sorting control in basket
    Delete from basket    3
    Verify No Element    //button[contains(@name,'remove')]
 
 Checkout
-   [Documentation]
+   [Documentation]    Completes the order and checks if the order was successful
    GoTo    https://www.saucedemo.com/
    Get users credentials
    Log into    ${STANDARD_USER_LOGIN}    ${PASSWORD}
@@ -28,5 +29,6 @@ Checkout
    Price sorting control
    Add items to basket    3
    Open basket
+   Price sorting control in basket
    Checkout and fill data    x    xx    00000
    Verify Text    ${checkout_txt}

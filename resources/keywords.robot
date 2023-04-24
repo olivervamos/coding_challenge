@@ -10,6 +10,7 @@ ${button_login}    //input[contains(@data-test, 'login-button')]
 ${xpath_users}    //div[@id = "login_credentials"][1]
 ${xpath_password}    //div[@class='login_password']
 @{price_list}
+@{price_list_basket}
 
 *** Keywords ***
 Get users credentials
@@ -44,7 +45,7 @@ Price sorting control
         ${price_num}    Convert To Number    ${price_txt}
         Append To List    ${price_list}    ${price_num}
     END
-    #Price sorting contr
+    #Price sorting control
     ${ListCount-1}=    Evaluate    ${elements_count}-1
        FOR    ${counter}    IN RANGE    ${elements_count}
            ${counter+1}=    Evaluate    ${counter}+1
@@ -53,7 +54,29 @@ Price sorting control
            ${ListItem2}=    Get From List    ${price_list}    ${counter+1}
            Should Be True    ${ListItem1}>=${ListItem2}
            Log To Console    ${ListItem1}' and '${ListItem2}
-       END     
+       END
+
+Price sorting control in basket
+#Create List of prices
+    ${elements_count}    Get Element Count    //div[contains(@class,'inventory_item_price')]
+
+    FOR    ${counter}    IN RANGE    ${elements_count}
+        ${element_num}    Evaluate    ${counter}+1
+        ${xpath}    Set Variable    //div[@class="cart_item"][${element_num}]//div[@class="inventory_item_price"]
+        ${price_txt}    Get Text    ${xpath}    between=$???
+        ${price_num}    Convert To Number    ${price_txt}
+        Append To List    ${price_list_basket}    ${price_num}
+    END
+    #Price sorting control
+    ${ListCount-1}=    Evaluate    ${elements_count}-1
+    FOR    ${counter}    IN RANGE    ${elements_count}
+        ${counter+1}=    Evaluate    ${counter}+1
+        IF    $counter == ${ListCount-1}    BREAK
+        ${ListItem1}=    Get From List    ${price_list_basket}    ${counter}
+        ${ListItem2}=    Get From List    ${price_list_basket}    ${counter+1}
+        Should Be True    ${ListItem1}>=${ListItem2}
+        Log To Console    ${ListItem1}' and '${ListItem2}
+    END     
 
 Add items to basket
 #Add 3 most expensive items to basket 
