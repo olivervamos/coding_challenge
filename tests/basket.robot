@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../resources/keywords.robot
-Test Setup    OpenBrowser    about:blank    chrome
+Test Setup    Setup Browser
 Test Teardown    CloseBrowser
 
 *** Variables ***
@@ -9,7 +9,6 @@ ${checkout_txt}    Checkout: Complete
 *** Test Cases ***
 Basket delete
    [Documentation]    Delete all items in basket and check they were deleted
-   GoTo    https://www.saucedemo.com/
    Get users credentials
    Log into    ${STANDARD_USER_LOGIN}    ${PASSWORD}
    Sorting high to low
@@ -22,7 +21,6 @@ Basket delete
 
 Checkout
    [Documentation]    Completes the order and checks if the order was successful
-   GoTo    https://www.saucedemo.com/
    Get users credentials
    Log into    ${STANDARD_USER_LOGIN}    ${PASSWORD}
    Sorting high to low
