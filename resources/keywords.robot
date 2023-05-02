@@ -13,6 +13,9 @@ ${xpath_password}    //div[@class='login_password']
 @{price_list_basket}
 
 *** Keywords ***
+Setup Browser
+    OpenBrowser    about:blank    chrome
+    GoTo    https://www.saucedemo.com/    
 Get users credentials
     ${STANDARD_USER_LOGIN}    Get Text    ${xpath_users}    between=are:???locked
     ${LOCKED_OUT_USER_LOGIN}    Get Text    ${xpath_users}    between=user???problem
