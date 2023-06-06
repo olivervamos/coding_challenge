@@ -2,6 +2,8 @@
 Library    QWeb
 Library    String
 Library    Collections
+Library    DateTime
+Library    OperatingSystem
 
 *** Variables ***
 ${input_username}    //input[contains(@placeholder, 'Username')]
@@ -14,12 +16,12 @@ ${xpath_password}    //div[@class='login_password']
 
 *** Keywords ***
 Setup Browser
-    OpenBrowser    about:blank    chrome
-    GoTo    https://www.saucedemo.com/    
+    Open Browser    about:blank    chrome
+    Go To    https://www.saucedemo.com/
 Get users credentials
     ${STANDARD_USER_LOGIN}    Get Text    ${xpath_users}    between=are:???locked
-    ${LOCKED_OUT_USER_LOGIN}    Get Text    ${xpath_users}    between=user???problem
-    ${PROBLEM_USER_LOGIN}    Get Text    ${xpath_users}    between=user???performance
+    ${LOCKED_OUT_USER_LOGIN}    Get Text    ${xpath_users}    between=standard_user???problem
+    ${PROBLEM_USER_LOGIN}    Get Text    ${xpath_users}    between=locked_out_user???performance
     ${PERFORMANCE_GLITCH_USER_LOGIN}    Get Text    ${xpath_users}    between=problem_user???
     ${PASSWORD}    GetText    ${xpath_password}    between=users:???
     Set Test Variable    ${STANDARD_USER_LOGIN}
@@ -57,7 +59,7 @@ Price sorting control
            ${ListItem2}=    Get From List    ${price_list}    ${counter+1}
            Should Be True    ${ListItem1}>=${ListItem2}
            Log To Console    ${ListItem1}' and '${ListItem2}
-       END
+       END     
 
 Price sorting control in basket
 #Create List of prices
@@ -79,7 +81,7 @@ Price sorting control in basket
         ${ListItem2}=    Get From List    ${price_list_basket}    ${counter+1}
         Should Be True    ${ListItem1}>=${ListItem2}
         Log To Console    ${ListItem1}' and '${ListItem2}
-    END     
+    END
 
 Add items to basket
 #Add 3 most expensive items to basket 
@@ -105,3 +107,17 @@ Checkout and fill data
     Type Text    //input[contains(@id,'postal-code')]    ${postal_code}
     Click Element    //input[contains(@id,'continue')]
     Click Element    //button[contains(@id,'finish')]    
+
+Login speed list
+    [Arguments]    ${user}    ${password}    ${list_times}
+   
+    FOR    ${counter}    IN RANGE    5
+        ${time_before}    Get Current Date
+        Log into    ${user}    ${password}
+        Verify Text    Products
+        ${time_after}    Get Current Date
+        Click Element    xpath=//button[@id='react-burger-menu-btn']
+        Click Text    Logout
+        ${time_login}    Subtract Date From Date    ${time_after}    ${time_before}
+        Append To List    ${list_times}    ${time_login}
+    END

@@ -1,7 +1,7 @@
 *** Settings ***
 Resource    ../resources/keywords.robot
 Test Setup    Setup Browser
-Test Teardown    CloseBrowser
+Test Teardown    Close Browser
 
 *** Test Cases ***
 
