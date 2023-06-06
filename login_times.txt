@@ -1,0 +1,1 @@
+Best average time: problem user: 0.428s, measured times:[0.452, 0.417, 0.411, 0.438, 0.42]standard user: 0.449s, measured times:[0.568, 0.424, 0.412, 0.415, 0.428]worst average time: performance glitch user: 5.448s, measured times:[5.449, 5.449, 5.455, 5.443, 5.444]
