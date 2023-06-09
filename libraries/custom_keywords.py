@@ -1,6 +1,7 @@
-def make_average_time(list_times):
-    total_time = round(sum(list_times), 3)
-    return round(total_time/5, 3)
+def make_average(list):
+    total_value = round(sum(list), 3)
+    x = len(list)
+    return round(total_value/x, 3)
 
 def report_data(name_1:str, time_user1, list_user1, name_2:str, time_user2, list_user2, name_3:str, time_user3, list_user3):
     average_times = [time_user1, time_user2, time_user3]

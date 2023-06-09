@@ -17,9 +17,9 @@ Login speed every user
     Login speed list    ${STANDARD_USER_LOGIN}    ${PASSWORD}    ${times_standard_user}
     Login speed list    ${PROBLEM_USER_LOGIN}    ${PASSWORD}    ${times_problem_user}
     Login speed list    ${PERFORMANCE_GLITCH_USER_LOGIN}    ${PASSWORD}    ${times_performance_glitch_user}
-    ${average_time_standard_user}    Make Average Time    ${times_standard_user}
-    ${average_time_problem_user}    Make Average Time    ${times_problem_user}
-    ${average_time_performance_glitch_user}    Make Average Time    ${times_performance_glitch_user}
+    ${average_time_standard_user}    Make Average    ${times_standard_user}
+    ${average_time_problem_user}    Make Average    ${times_problem_user}
+    ${average_time_performance_glitch_user}    Make Average    ${times_performance_glitch_user}
     ${data}    Report Data    standard user    ${average_time_standard_user}    ${times_standard_user}    
     ...    problem user    ${average_time_problem_user}    ${times_problem_user}    
     ...    performance glitch user    ${average_time_performance_glitch_user}    ${times_performance_glitch_user}
