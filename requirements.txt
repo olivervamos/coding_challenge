@@ -1,3 +1,4 @@
 robotframework==6.0.2
 QWeb==2.1.2
 robotframework-seleniumlibrary==6.0.0
+selenium==4.6.0
