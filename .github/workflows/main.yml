@@ -37,4 +37,4 @@ jobs:
           pip install -r requirements.txt
       - name: Run tests
         run: |
-           login_speed.robot
+           robot tests/login_speed.robot
