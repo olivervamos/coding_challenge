@@ -1,1 +1,2 @@
 robotframework==6.0.2
+QWeb==2.1.2
